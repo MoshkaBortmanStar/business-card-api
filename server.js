@@ -99,7 +99,9 @@ app.post('/api/send', async (req, res) => {
 // Запускаем сервер на указанном порту
 // В Spring это делается автоматически: server.port=3000 в application.properties
 // Здесь вручную — аналог встроенного Tomcat в Spring Boot
-app.listen(PORT, () => {
+// '127.0.0.1' — слушаем ТОЛЬКО localhost, снаружи по IP:3000 не достучаться
+// Без этого сервер слушает 0.0.0.0 (все интерфейсы) и доступен по IP напрямую
+app.listen(PORT, '127.0.0.1', () => {
   // Колбэк — вызывается когда сервер успешно запустился (как ApplicationReadyEvent в Spring)
   console.log(`Сервер запущен: http://localhost:${PORT}`);
 });
